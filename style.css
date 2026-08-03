@@ -1,0 +1,436 @@
+/* ==========================================================================
+   PREMIUM PORTFOLIO STYLES — SUNITA PATTANAYAK
+   Unique, borderless, cinematic design system
+   ========================================================================== */
+
+/* ---- Noise Overlay ---- */
+.noise-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' h='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* ---- Custom Cursor ---- */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #06B6D4;
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease-in-out;
+}
+.cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(139, 92, 246, 0.5);
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+body.hovering-link .cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-color: #06B6D4;
+    background-color: rgba(6, 182, 212, 0.1);
+}
+
+/* ---- Typing Cursor Blink ---- */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+.cursor-blink { animation: blink 1s infinite; }
+
+/* ---- Custom Scrollbar ---- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #030712; }
+::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #06B6D4; }
+
+/* ---- Mobile Nav ---- */
+#menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+#menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+#menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ---- Filter Buttons ---- */
+.skill-filter-btn.active {
+    background: linear-gradient(to right, #06B6D4, #8B5CF6) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+}
+.project-filter-btn.active {
+    background-color: #06B6D4 !important;
+    color: #030712 !important;
+}
+
+/* ==========================================================================
+   PRELOADER — Photo with orbit rings
+   ========================================================================== */
+@keyframes preloader-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes preloader-rotate-reverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+@keyframes preloader-photo-reveal {
+    0% { clip-path: circle(0% at 50% 50%); opacity: 0; }
+    50% { clip-path: circle(40% at 50% 50%); opacity: 0.7; }
+    100% { clip-path: circle(50% at 50% 50%); opacity: 1; }
+}
+@keyframes preloader-glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 60px rgba(139, 92, 246, 0.1); }
+    50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.6), 0 0 100px rgba(139, 92, 246, 0.3); }
+}
+.preloader-photo-container {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 1.5rem auto;
+}
+.preloader-photo-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #06B6D4;
+    border-right-color: #8B5CF6;
+    animation: preloader-rotate 2s linear infinite;
+}
+.preloader-photo-ring-2 {
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-bottom-color: #3B82F6;
+    border-left-color: #A855F7;
+    animation: preloader-rotate-reverse 3s linear infinite;
+}
+.preloader-photo-ring-3 {
+    position: absolute;
+    inset: -24px;
+    border-radius: 50%;
+    border: 1px dashed rgba(6, 182, 212, 0.2);
+    animation: preloader-rotate 8s linear infinite;
+}
+.preloader-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    animation: preloader-photo-reveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+               preloader-glow-pulse 2s ease-in-out infinite 1.5s;
+    border: 3px solid #0B0F19;
+}
+
+/* ==========================================================================
+   HERO PHOTO — Clean, Borderless, Cinematic
+   NO rotating borders. Just clean glow + smooth edges.
+   ========================================================================== */
+
+/* Soft breathing glow behind the hero photo */
+@keyframes breathing-glow {
+    0%, 100% {
+        opacity: 0.2;
+        filter: blur(50px);
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        filter: blur(70px);
+        transform: scale(1.08);
+    }
+}
+.hero-glow-aura {
+    animation: breathing-glow 5s ease-in-out infinite;
+}
+
+/* Hero photo image styling — clean, no card border */
+.hero-photo-clean {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Shimmer sweep on hero photo */
+@keyframes shimmer-sweep {
+    0% { transform: translateX(-100%) rotate(-45deg); }
+    100% { transform: translateX(200%) rotate(-45deg); }
+}
+.hero-photo-shimmer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    pointer-events: none;
+    z-index: 10;
+}
+.hero-photo-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.04),
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.04),
+        transparent
+    );
+    animation: shimmer-sweep 5s ease-in-out infinite;
+}
+
+/* ---- Floating animation for badges ---- */
+@keyframes float-badge {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+.floating-badge { animation: float-badge 3s ease-in-out infinite; }
+.floating-badge-delay { animation: float-badge 3s ease-in-out infinite 1.5s; }
+
+/* ==========================================================================
+   ANIMATED GRADIENT TEXT (HERO NAME)
+   ========================================================================== */
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient-text {
+    background-size: 200% 200%;
+    animation: gradient-flow 4s ease infinite;
+}
+
+/* ==========================================================================
+   SECTION DIVIDERS
+   ========================================================================== */
+@keyframes divider-glow {
+    0%, 100% { opacity: 0.4; transform: scaleX(0.8); }
+    50% { opacity: 1; transform: scaleX(1); }
+}
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #06B6D4, #8B5CF6, #3B82F6, transparent);
+    animation: divider-glow 3s ease-in-out infinite;
+    border: none;
+    margin: 0;
+}
+
+/* ==========================================================================
+   STATS COUNTER
+   ========================================================================== */
+@keyframes count-glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(6, 182, 212, 0.3); }
+    50% { text-shadow: 0 0 30px rgba(6, 182, 212, 0.7), 0 0 60px rgba(139, 92, 246, 0.3); }
+}
+.stat-number { animation: count-glow 2s ease-in-out infinite; }
+
+/* ==========================================================================
+   ABOUT SECTION PHOTO
+   ========================================================================== */
+.about-photo-wrapper {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+.about-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.about-photo-wrapper:hover img {
+    transform: scale(1.05);
+}
+.about-photo-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 2rem;
+    background: radial-gradient(ellipse, rgba(139, 92, 246, 0.15), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ==========================================================================
+   PORTFOLIO — Step Cards
+   ========================================================================== */
+.portfolio-step-card {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.portfolio-step-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0%;
+    background: linear-gradient(to top, rgba(6, 182, 212, 0.04), transparent);
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.5rem;
+    pointer-events: none;
+}
+.portfolio-step-card:hover::before {
+    height: 100%;
+}
+.portfolio-step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(139, 92, 246, 0.08);
+}
+
+/* ==========================================================================
+   MARQUEE QUOTES
+   ========================================================================== */
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 30s linear infinite;
+}
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+.marquee-item {
+    flex-shrink: 0;
+    padding: 0 2rem;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   FUN FACTS CARDS
+   ========================================================================== */
+@keyframes fun-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-6px) rotate(1deg); }
+    75% { transform: translateY(4px) rotate(-1deg); }
+}
+.fun-card {
+    animation: fun-float 4s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+.fun-card:nth-child(2) { animation-delay: 0.5s; }
+.fun-card:nth-child(3) { animation-delay: 1s; }
+.fun-card:nth-child(4) { animation-delay: 1.5s; }
+.fun-card:hover {
+    transform: translateY(-8px) scale(1.05) !important;
+    box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15);
+}
+
+/* ==========================================================================
+   CURRENTLY LEARNING TICKER
+   ========================================================================== */
+@keyframes ticker-slide {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+.learning-ticker {
+    overflow: hidden;
+    position: relative;
+}
+.learning-ticker-content {
+    display: flex;
+    gap: 2rem;
+    animation: marquee-scroll 20s linear infinite;
+    width: max-content;
+}
+
+/* ==========================================================================
+   CARD HOVER GLOW
+   ========================================================================== */
+.card-hover-glow {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover-glow:hover {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.15), 0 0 40px rgba(139, 92, 246, 0.08);
+    transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   MAGNETIC BUTTON
+   ========================================================================== */
+.magnetic-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.magnetic-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+.magnetic-btn:hover::before {
+    transform: translateX(100%);
+}
+
+/* ==========================================================================
+   BACK TO TOP
+   ========================================================================== */
+@keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+#back-to-top {
+    animation: bounce-subtle 2s ease-in-out infinite;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* ==========================================================================
+   ORBIT PARTICLES (hero)
+   ========================================================================== */
+@keyframes orbit-particle {
+    0% { transform: rotate(0deg) translateX(170px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(170px) rotate(-360deg); }
+}
+@keyframes orbit-particle-2 {
+    0% { transform: rotate(0deg) translateX(195px) rotate(0deg); }
+    100% { transform: rotate(-360deg) translateX(195px) rotate(360deg); }
+}
+.orbit-dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin: -2.5px;
+    animation: orbit-particle 8s linear infinite;
+}
+.orbit-dot-2 {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin: -2px;
+    animation: orbit-particle-2 10s linear infinite;
+}
+
+/* ==========================================================================
+   RESPONSIVE POLISH
+   ========================================================================== */
+@media (max-width: 768px) {
+    .cursor-dot, .cursor-ring { display: none !important; }
+    .orbit-dot, .orbit-dot-2 { display: none; }
+}
