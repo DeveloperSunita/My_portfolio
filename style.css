@@ -9,10 +9,30 @@
     --purple: #8B5CF6;
     --blue: #3B82F6;
     --glow: #A855F7;
-    --dark-900: #030712;
-    --dark-800: #0B0F19;
-    --dark-700: #111827;
-    --dark-600: #1F2937;
+    
+    /* Shadow Black & Layered Black Shades */
+    --dark-900: #050508;
+    --dark-800: #0b0c10;
+    --dark-700: #101116;
+    --dark-600: #181922;
+
+    --bg-main: #050508;
+    --bg-card: #0b0c10;
+    --bg-subsurface: #101116;
+    --bg-header: rgba(5, 5, 8, 0.85);
+    --bg-header-scrolled: rgba(5, 5, 8, 0.94);
+    --bg-mobile-menu: #050508;
+    --bg-input: #08090d;
+
+    --text-main: #f8fafc;
+    --text-heading: #ffffff;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-card: rgba(255, 255, 255, 0.08);
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
 }
 
 /* ---- Global Smooth Scroll & Selection ---- */
@@ -89,10 +109,386 @@ body.hovering-link .cursor-ring {
 ::-webkit-scrollbar-thumb { background: var(--dark-600); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
-/* ---- Mobile Nav ---- */
-#menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-#menu-toggle.active .bar:nth-child(2) { opacity: 0; }
-#menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+/* ==========================================================================
+   FIXED NAVBAR & MOBILE MENU STYLING
+   ========================================================================== */
+#main-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 100 !important;
+    background-color: var(--bg-header) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease !important;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+#main-header.navbar-scrolled {
+    background-color: var(--bg-header-scrolled) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Hamburger button styling & active X state */
+#menu-toggle {
+    position: relative;
+    z-index: 105;
+    cursor: pointer;
+}
+
+#menu-toggle .bar {
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s ease, background-color 0.3s ease;
+}
+
+#menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background-color: #06B6D4;
+}
+
+#menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background-color: #06B6D4;
+}
+
+/* Mobile Menu Overlay - Solid, high-contrast, beautiful mobile drawer */
+.mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    background-color: var(--bg-mobile-menu) !important;
+    background-image: 
+        radial-gradient(circle at 50% 12%, rgba(6, 182, 212, 0.14), transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.1), transparent 50%) !important;
+    z-index: 95;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: calc(env(safe-area-inset-top, 16px) + 68px) 20px calc(env(safe-area-inset-bottom, 16px) + 20px) 20px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                visibility 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.mobile-menu-content {
+    max-width: 440px;
+    margin: 0 auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ==========================================================================
+   THEME STYLES — SHADOW BLACK (DARK) & WHITE MODE (LIGHT)
+   ========================================================================== */
+
+/* Dark Mode (Shadow Black & Black Shades) */
+html.dark {
+    color-scheme: dark;
+}
+
+html.dark body {
+    background-color: #050508 !important;
+    color: #f1f5f9 !important;
+}
+
+html.dark .bg-dark-900 {
+    background-color: #050508 !important;
+}
+html.dark .bg-dark-800 {
+    background-color: #0b0c10 !important;
+}
+html.dark .bg-dark-700 {
+    background-color: #101116 !important;
+}
+html.dark .bg-dark-600 {
+    background-color: #181922 !important;
+}
+
+/* Light Mode / White Mode */
+html.light {
+    color-scheme: light;
+}
+
+html.light body {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+/* Navbar in Light Mode */
+html.light #main-header {
+    background-color: rgba(255, 255, 255, 0.88) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+}
+
+html.light #main-header.navbar-scrolled {
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.95) !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06) !important;
+}
+
+html.light #main-header nav {
+    background-color: rgba(241, 245, 249, 0.85) !important;
+    border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+html.light .nav-link {
+    color: #475569 !important;
+}
+
+html.light .nav-link:hover,
+html.light .nav-link.active {
+    color: #06B6D4 !important;
+}
+
+/* Backgrounds & Section Stripes in Light Mode */
+html.light .bg-dark-900,
+html.light .bg-dark-900\/50,
+html.light .bg-dark-900\/60,
+html.light .bg-dark-900\/80,
+html.light .bg-dark-900\/90 {
+    background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+html.light .bg-dark-800,
+html.light .bg-dark-800\/20,
+html.light .bg-dark-800\/30,
+html.light .bg-dark-800\/40,
+html.light .bg-dark-800\/50,
+html.light .bg-dark-800\/60,
+html.light .bg-dark-800\/80,
+html.light .bg-dark-800\/90 {
+    background-color: #ffffff !important;
+    border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+/* All Cards in Light Mode */
+html.light .skill-card,
+html.light .project-card,
+html.light .service-card,
+html.light .cert-card,
+html.light .stat-card,
+html.light .about-card,
+html.light .contact-card {
+    background-color: #ffffff !important;
+    border-color: rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02) !important;
+}
+
+html.light .skill-card:hover,
+html.light .project-card:hover,
+html.light .service-card:hover,
+html.light .cert-card:hover {
+    box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.08), 0 0 25px rgba(6, 182, 212, 0.15) !important;
+    border-color: rgba(6, 182, 212, 0.5) !important;
+}
+
+/* Sub-containers & tile backgrounds in Light Mode */
+html.light .bg-dark-900\/80,
+html.light .bg-dark-900\/90,
+html.light .bg-dark-700,
+html.light .bg-dark-700\/80,
+html.light .bg-dark-700\/50,
+html.light .bg-dark-600 {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* Borders in Light Mode */
+html.light .border-slate-800,
+html.light .border-slate-800\/40,
+html.light .border-slate-800\/50,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/80,
+html.light .border-slate-700,
+html.light .border-slate-700\/50 {
+    border-color: #e2e8f0 !important;
+}
+
+/* Typography in Light Mode */
+html.light .text-slate-100,
+html.light .text-slate-200,
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light .hero-title {
+    color: #090d16 !important;
+}
+
+html.light .text-slate-300 {
+    color: #334155 !important;
+}
+
+html.light .text-slate-400,
+html.light .text-slate-500 {
+    color: #475569 !important;
+}
+
+/* Photo Card Overlay: Always crisp white on dark photo gradient */
+.hero-photo-info-overlay h3,
+html.light .hero-photo-info-overlay h3 {
+    color: #ffffff !important;
+}
+.hero-photo-info-overlay p,
+html.light .hero-photo-info-overlay p {
+    color: #cbd5e1 !important;
+}
+
+/* Learning Ticker in Light Mode */
+html.light .learning-ticker-wrapper {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+}
+html.light .learning-ticker-badge {
+    background-color: #f1f5f9 !important;
+    box-shadow: 10px 0 10px -5px #e2e8f0 !important;
+}
+html.light .learning-ticker-fade-left {
+    background: linear-gradient(to right, #f1f5f9, transparent) !important;
+}
+html.light .learning-ticker-fade-right {
+    background: linear-gradient(to left, #f1f5f9, transparent) !important;
+}
+html.light .learning-ticker-content span.text-slate-300 {
+    color: #334155 !important;
+}
+
+/* Inputs & Form controls in Light Mode */
+html.light input,
+html.light textarea,
+html.light select,
+html.light .contact-input {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder {
+    color: #94a3b8 !important;
+}
+html.light input:focus,
+html.light textarea:focus,
+html.light .contact-input:focus {
+    border-color: #06B6D4 !important;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15) !important;
+}
+
+/* Filter buttons in Light Mode */
+html.light .skill-filter-btn:not(.active),
+html.light .project-filter-btn:not(.active) {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+    color: #475569 !important;
+}
+html.light .skill-filter-btn:not(.active):hover,
+html.light .project-filter-btn:not(.active):hover {
+    color: #090d16 !important;
+    border-color: #cbd5e1 !important;
+    background-color: #ffffff !important;
+}
+
+/* Theme Toggle Button styles */
+#theme-toggle {
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+html.light #theme-toggle {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+#theme-toggle:hover {
+    transform: rotate(15deg) scale(1.05);
+}
+
+/* Mobile Menu in Light Mode */
+html.light .mobile-menu-overlay {
+    background-color: #ffffff !important;
+    background-image: 
+        radial-gradient(circle at 50% 10%, rgba(6, 182, 212, 0.08), transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.06), transparent 45%) !important;
+}
+
+html.light .mobile-nav-link {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+html.light .mobile-nav-link span.text-slate-100 {
+    color: #090d16 !important;
+}
+html.light .mobile-nav-link:hover {
+    background-color: #f1f5f9 !important;
+    border-color: rgba(6, 182, 212, 0.4) !important;
+}
+
+html.light #mobile-theme-toggle {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* Canvas & Ambient lighting in Light Mode */
+html.light #bg-canvas {
+    opacity: 0.25 !important;
+}
+html.light .parallax-float {
+    opacity: 0.25 !important;
+}
+html.light .parallax-float-2 {
+    opacity: 0.2 !important;
+}
+html.light .noise-overlay {
+    opacity: 0.012 !important;
+}
+
+/* Preloader in Light Mode */
+html.light #preloader {
+    background-color: #f8fafc !important;
+}
+html.light #preloader h2 {
+    color: #090d16 !important;
+}
+html.light #loader-status {
+    color: #64748b !important;
+}
+
+/* Selection in Light Mode */
+html.light ::selection {
+    background: rgba(6, 182, 212, 0.2);
+    color: #0284c7;
+}
+
+/* Custom Scrollbar in Light Mode */
+html.light ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan);
+}
 
 /* ---- Filter Buttons ---- */
 .skill-filter-btn.active {

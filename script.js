@@ -6,6 +6,61 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ====================================================================
+    // 0. THEME SWITCHER (White Mode & Shadow Black Dark Mode)
+    // ====================================================================
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleIcon = document.getElementById('theme-toggle-icon');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+    const mobileThemeText = document.getElementById('mobile-theme-text');
+
+    function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            if (themeToggleIcon) {
+                themeToggleIcon.className = 'fa-solid fa-moon text-sm text-cyan-400 transition-transform duration-300';
+            }
+            if (mobileThemeIcon) {
+                mobileThemeIcon.className = 'fa-solid fa-moon text-xs text-cyan-400';
+            }
+            if (mobileThemeText) {
+                mobileThemeText.textContent = 'Dark Mode';
+            }
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+            if (themeToggleIcon) {
+                themeToggleIcon.className = 'fa-solid fa-sun text-sm text-amber-500 transition-transform duration-300';
+            }
+            if (mobileThemeIcon) {
+                mobileThemeIcon.className = 'fa-solid fa-sun text-xs text-amber-500';
+            }
+            if (mobileThemeText) {
+                mobileThemeText.textContent = 'Light Mode';
+            }
+        }
+        localStorage.setItem('portfolio-theme', theme);
+    }
+
+    const currentSavedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    applyTheme(currentSavedTheme);
+
+    function toggleTheme() {
+        const isCurrentlyDark = document.documentElement.classList.contains('dark');
+        const nextTheme = isCurrentlyDark ? 'light' : 'dark';
+        applyTheme(nextTheme);
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+    }
+
+    // ====================================================================
     // 1. CONTACT FORM HANDLING WITH FORMSUBMIT.CO
     // ====================================================================
     const contactForm = document.getElementById('contact-form');
@@ -333,20 +388,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
+    function closeMobileMenu() {
+        if (menuToggle && mobileMenu) {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function openMobileMenu() {
+        if (menuToggle && mobileMenu) {
+            menuToggle.classList.add('active');
+            mobileMenu.classList.add('active');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
     if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            const isOpen = menuToggle.classList.contains('active');
-            mobileMenu.style.opacity = isOpen ? '1' : '0';
-            mobileMenu.style.pointerEvents = isOpen ? 'auto' : 'none';
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
         });
 
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                mobileMenu.style.opacity = '0';
-                mobileMenu.style.pointerEvents = 'none';
+                closeMobileMenu();
             });
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
         });
     }
 
@@ -730,33 +810,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ====================================================================
-    // 24. NAVBAR HIDE/SHOW ON SCROLL
+    // 24. FIXED NAVBAR ON SCROLL
     // ====================================================================
-    let lastScrollY = 0;
     const header = document.getElementById('main-header');
 
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
+    function handleNavbarScroll() {
+        if (!header) return;
+        const currentScrollY = window.scrollY || document.documentElement.scrollTop;
 
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Scrolling down — hide
-            gsap.to(header, { y: -100, duration: 0.3, ease: "power2.inOut" });
+        if (currentScrollY > 20) {
+            header.classList.add('navbar-scrolled');
         } else {
-            // Scrolling up — show
-            gsap.to(header, { y: 0, duration: 0.3, ease: "power2.inOut" });
+            header.classList.remove('navbar-scrolled');
         }
+    }
 
-        // Add glass effect when scrolled
-        if (currentScrollY > 50) {
-            header.classList.add('bg-dark-900/80');
-            header.classList.remove('bg-dark-900/60');
-        } else {
-            header.classList.remove('bg-dark-900/80');
-            header.classList.add('bg-dark-900/60');
-        }
-
-        lastScrollY = currentScrollY;
-    });
+    window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+    handleNavbarScroll();
 
     // ====================================================================
     // 25. SOCIAL ICON STAGGER ENTRANCE

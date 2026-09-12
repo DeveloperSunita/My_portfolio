@@ -20,76 +20,93 @@
     <meta property="og:title" content="Sunita Pattanayak | Full Stack Developer Portfolio">
     <meta property="og:description"
         content="Explore my modern, responsive, and interactive frontend & backend development projects and skills.">
-        <meta property="og:image"
-            content="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=1200&auto=format&fit=crop">
 
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Sunita Pattanayak | Full Stack Developer Portfolio">
-        <meta name="twitter:description"
-            content="Explore my modern, responsive, and interactive frontend & backend development projects and skills.">
-        <meta name="twitter:image"
-            content="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=1200&auto=format&fit=crop">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sunita Pattanayak | Full Stack Developer Portfolio">
+    <meta name="twitter:description"
+        content="Explore my modern, responsive, and interactive frontend & backend development projects and skills.">
+    <meta name="twitter:image"
+        content="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=1200&auto=format&fit=crop">
 
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="logo.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
 
-        <!-- Fonts: Google Inter & Plus Jakarta Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
-            rel="stylesheet">
+    <!-- Fonts: Google Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
 
-        <!-- Tailwind CSS CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: {
-                    extend: {
-                        colors: {
-                            dark: {
-                                900: '#030712',
-                                800: '#0B0F19',
-                                700: '#111827',
-                                600: '#1F2937',
-                            },
-                            brand: {
-                                cyan: '#06B6D4',
-                                purple: '#8B5CF6',
-                                blue: '#3B82F6',
-                                glow: '#A855F7'
-                            }
+    <!-- Theme Mode Initializer (Prevents FOUC) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+            }
+        })();
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#050508',
+                            800: '#0b0c10',
+                            700: '#101116',
+                            600: '#181922',
                         },
-                        fontFamily: {
-                            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-                            mono: ['Fira Code', 'monospace']
+                        brand: {
+                            cyan: '#06B6D4',
+                            purple: '#8B5CF6',
+                            blue: '#3B82F6',
+                            glow: '#A855F7'
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
                     }
                 }
             }
-        </script>
+        }
+    </script>
 
-        <!-- FontAwesome Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        <!-- Stylesheets -->
-        <link rel="stylesheet" href="style.css">
+    <!-- Devicon Icons (Official Programming & Tech Logos) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-        <!-- GSAP & ScrollTrigger CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
 
-        <!-- Lenis Smooth Scroll -->
-        <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-        <!-- Vanilla Tilt -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+
+    <!-- Vanilla Tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
 
-        <!-- Structured Data JSON-LD -->
-        <script type="application/ld+json">
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"Person",
@@ -157,16 +174,16 @@
         <div class="noise-overlay"></div>
     </div>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR (Fixed at top while scrolling) -->
     <header id="main-header"
-        class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-4 px-6 sm:px-12 backdrop-blur-md bg-dark-900/60 border-b border-slate-800/50">
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3.5 px-4 sm:px-12 backdrop-blur-md bg-dark-900/80 border-b border-slate-800/60">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="#hero" class="group flex items-center space-x-3">
+            <a href="#hero" class="group flex items-center space-x-2.5 sm:space-x-3">
                 <img src="logo.png" alt="SP Logo"
-                    class="w-10 h-10 rounded-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300 object-contain">
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300 object-contain">
                 <span
-                    class="font-bold text-lg tracking-tight hidden sm:block text-slate-100 group-hover:text-cyan-400 transition-colors">
-                    Sunita<span class="text-cyan-400">.dev</span>
+                    class="font-bold text-base sm:text-lg tracking-tight text-slate-100 group-hover:text-cyan-400 transition-colors">
+                    Sunita<span class="text-cyan-400"> Pattanayak</span>
                 </span>
             </a>
 
@@ -189,41 +206,147 @@
                     class="nav-link px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-cyan-400 transition-all">Contact</a>
             </nav>
 
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Theme Mode Toggle (White Mode / Shadow Black Mode) -->
+                <button id="theme-toggle" aria-label="Toggle Light and Dark Mode" title="Toggle Light / Dark Mode"
+                    class="w-10 h-10 rounded-xl bg-dark-800/80 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all focus:outline-none active:scale-95">
+                    <i id="theme-toggle-icon" class="fa-solid fa-moon text-sm text-cyan-400 transition-transform duration-300"></i>
+                </button>
+
                 <a href="#contact"
-                    class="hidden sm:inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all shadow-md shadow-purple-500/20 active:scale-95 magnetic-btn">
+                    class="hidden sm:inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all shadow-md shadow-purple-500/20 active:scale-95 magnetic-btn">
                     <span>Hire Me</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </a>
 
-                <!-- Mobile Menu Toggle -->
-                <button id="menu-toggle"
-                    class="md:hidden w-10 h-10 flex flex-col justify-center items-center space-y-1.5 z-50 focus:outline-none">
-                    <span class="bar w-6 h-0.5 bg-slate-200 transition-transform duration-300"></span>
-                    <span class="bar w-6 h-0.5 bg-slate-200 transition-opacity duration-300"></span>
-                    <span class="bar w-6 h-0.5 bg-slate-200 transition-transform duration-300"></span>
+                <!-- Mobile Menu Toggle Button -->
+                <button id="menu-toggle" aria-label="Toggle Navigation Menu"
+                    class="md:hidden w-10 h-10 rounded-xl bg-dark-800/80 border border-slate-800 flex flex-col justify-center items-center space-y-1.5 focus:outline-none transition-all active:scale-95 hover:border-cyan-500/50">
+                    <span class="bar w-5 h-0.5 bg-slate-200 rounded-full transition-all duration-300"></span>
+                    <span class="bar w-5 h-0.5 bg-slate-200 rounded-full transition-all duration-300"></span>
+                    <span class="bar w-5 h-0.5 bg-slate-200 rounded-full transition-all duration-300"></span>
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Nav Menu -->
-        <div id="mobile-menu"
-            class="fixed inset-0 bg-dark-900/95 backdrop-blur-2xl z-40 flex flex-col justify-center items-center space-y-6 opacity-0 pointer-events-none transition-all duration-300 md:hidden">
-            <a href="#hero" class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">Home</a>
-            <a href="#about" class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">About</a>
-            <a href="#skills" class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">Skills</a>
-            <a href="#projects"
-                class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">Projects</a>
-            <a href="#services"
-                class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">Services</a>
-            <a href="#certificates"
-                class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">Certificates</a>
-            <a href="#contact" class="mobile-nav-link text-2xl font-bold tracking-wider hover:text-cyan-400">Contact</a>
-            <a href="#contact"
-                class="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 font-bold uppercase tracking-wider text-sm mt-4">Hire
-                Me</a>
-        </div>
     </header>
+
+    <!-- MOBILE NAVIGATION OVERLAY (Dedicated fullscreen overlay with solid opaque dark background) -->
+    <div id="mobile-menu" class="mobile-menu-overlay md:hidden" aria-hidden="true">
+        <div class="mobile-menu-content">
+            <!-- Navigation Links with Icons -->
+            <nav class="flex flex-col space-y-2 py-2">
+                <a href="#hero"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-house text-cyan-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Home</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <a href="#about"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-user text-purple-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">About</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <a href="#skills"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-code text-cyan-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Skills</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <a href="#projects"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-laptop-code text-blue-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Projects</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <a href="#services"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-briefcase text-emerald-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Services</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <a href="#certificates"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-award text-amber-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Certificates</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+                <a href="#contact"
+                    class="mobile-nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl bg-dark-800/50 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-dark-800/90 active:scale-[0.98] transition-all">
+                    <span class="flex items-center space-x-3.5">
+                        <i class="fa-solid fa-envelope text-pink-400 text-base w-5 text-center"></i>
+                        <span
+                            class="text-base font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">Contact</span>
+                    </span>
+                    <i
+                        class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all"></i>
+                </a>
+            </nav>
+
+            <!-- Bottom Action & Social Links -->
+            <div class="space-y-4 pt-4 pb-4 border-t border-slate-800/80">
+                <!-- Mobile Theme Toggle -->
+                <div class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-dark-800/60 border border-slate-800/80">
+                    <span class="text-xs font-semibold text-slate-300 flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-half-stroke text-cyan-400"></i>
+                        <span>Theme Mode</span>
+                    </span>
+                    <button id="mobile-theme-toggle" type="button" aria-label="Toggle Theme"
+                        class="px-3 py-1.5 rounded-lg bg-dark-700 text-xs font-semibold text-slate-200 border border-slate-700 flex items-center space-x-1.5 active:scale-95 transition-all">
+                        <i id="mobile-theme-icon" class="fa-solid fa-moon text-xs text-cyan-400"></i>
+                        <span id="mobile-theme-text">Dark Mode</span>
+                    </button>
+                </div>
+
+                <a href="#contact"
+                    class="mobile-nav-link w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 font-bold uppercase tracking-wider text-xs text-white text-center flex items-center justify-center space-x-2 shadow-lg shadow-purple-500/25 active:scale-95 transition-all">
+                    <span>Hire Me</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+
+                <div class="flex items-center justify-center space-x-4 pt-1">
+                    <a href="https://github.com/DeveloperSunita" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        class="w-10 h-10 rounded-xl bg-dark-800/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                        <i class="fa-brands fa-github text-base"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/sunitapattanayak" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        class="w-10 h-10 rounded-xl bg-dark-800/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                        <i class="fa-brands fa-linkedin text-base"></i>
+                    </a>
+                    <a href="mailto:sunitapattanayak2005@gmail.com" aria-label="Email"
+                        class="w-10 h-10 rounded-xl bg-dark-800/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                        <i class="fa-solid fa-envelope text-base"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================== HERO SECTION ========================== -->
     <section id="hero"
@@ -325,7 +448,7 @@
 
                         <!-- Bottom info overlay -->
                         <div
-                            class="absolute inset-x-0 bottom-0 rounded-b-[1.5rem] bg-gradient-to-t from-dark-900 via-dark-900/70 to-transparent p-6 space-y-2 select-none">
+                            class="hero-photo-info-overlay absolute inset-x-0 bottom-0 rounded-b-[1.5rem] bg-gradient-to-t from-dark-900 via-dark-900/70 to-transparent p-6 space-y-2 select-none">
                             <span
                                 class="px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-300 text-[10px] font-mono border border-cyan-500/20 backdrop-blur-sm inline-block">✦
                                 BCA Student</span>
@@ -370,13 +493,13 @@
     </section>
 
     <!-- CURRENTLY LEARNING TICKER -->
-    <div class="py-4 border-y border-slate-800/50 bg-cyan-950/20 overflow-hidden relative flex items-center">
+    <div class="learning-ticker-wrapper py-4 border-y border-slate-800/50 bg-cyan-950/20 overflow-hidden relative flex items-center">
         <!-- Gradients to fade edges -->
-        <div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-dark-900 to-transparent z-10"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-dark-900 to-transparent z-10"></div>
+        <div class="learning-ticker-fade-left absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-dark-900 to-transparent z-10"></div>
+        <div class="learning-ticker-fade-right absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-dark-900 to-transparent z-10"></div>
 
         <div
-            class="flex items-center space-x-4 absolute left-4 z-20 bg-dark-900 pr-4 shadow-[10px_0_10px_-5px_#0B0F19]">
+            class="learning-ticker-badge flex items-center space-x-4 absolute left-4 z-20 bg-dark-900 pr-4 shadow-[10px_0_10px_-5px_#0B0F19]">
             <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
             <span class="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold">Currently Learning:</span>
         </div>
@@ -677,232 +800,315 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="skills-grid">
 
                 <!-- Skill Item: HTML5 -->
-                <div class="reveal reveal-up stagger-1 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-1 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="frontend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-html5 text-3xl text-orange-500 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">90%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">HTML5</h3>
-                    <p class="text-xs text-slate-400 mt-1">Semantic Markup & Accessibility</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-orange-500 to-amber-400 h-1.5 rounded-full"
-                            data-width="90"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-html5-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Frontend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">HTML5
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Semantic Markup & Accessibility</p>
                     </div>
                 </div>
 
                 <!-- Skill Item: CSS3 -->
-                <div class="reveal reveal-up stagger-2 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-2 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="frontend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-css3-alt text-3xl text-blue-500 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">85%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">CSS3</h3>
-                    <p class="text-xs text-slate-400 mt-1">Flexbox, Grid & Keyframes</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-blue-500 to-cyan-400 h-1.5 rounded-full"
-                            data-width="85"></div>
-                    </div>
-                </div>
-
-                <!-- Skill Item: Tailwind CSS -->
-                <div class="reveal reveal-up stagger-3 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
-                    data-category="frontend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-solid fa-wind text-3xl text-cyan-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">85%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">Tailwind CSS</h3>
-                    <p class="text-xs text-slate-400 mt-1">Utility-First Responsive Design</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-cyan-400 to-teal-400 h-1.5 rounded-full"
-                            data-width="85"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-css3-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Frontend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">CSS3
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Flexbox, Grid & Modern Layouts</p>
                     </div>
                 </div>
 
                 <!-- Skill Item: JavaScript -->
-                <div class="reveal reveal-up stagger-4 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-3 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="frontend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-js text-3xl text-yellow-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">85%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">JavaScript</h3>
-                    <p class="text-xs text-slate-400 mt-1">ES6+, DOM Manipulation, Async</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-yellow-400 to-amber-500 h-1.5 rounded-full"
-                            data-width="85"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-javascript-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Frontend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">
+                            JavaScript</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">ES6+, DOM Manipulation & Async/Await</p>
                     </div>
                 </div>
 
-
-                <!-- Skill Item: C & Java -->
-                <div class="reveal reveal-up stagger-5 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
-                    data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center space-x-2">
-                            <i
-                                class="fa-solid fa-c text-2xl text-blue-400 group-hover:scale-110 transition-transform"></i>
-                            <i
-                                class="fa-brands fa-java text-2xl text-red-400 group-hover:scale-110 transition-transform"></i>
+                <!-- Skill Item: Tailwind CSS -->
+                <div class="reveal reveal-up stagger-4 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
+                    data-category="frontend">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-tailwindcss-original colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Frontend</span>
                         </div>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">80%</span>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">
+                            Tailwind CSS</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Utility-First Responsive UI Design</p>
                     </div>
-                    <h3 class="font-bold text-slate-200">C & Java</h3>
-                    <p class="text-xs text-slate-400 mt-1">Procedural Logic, OOPs & Memory Management</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-blue-500 to-red-500 h-1.5 rounded-full"
-                            data-width="80"></div>
+                </div>
+
+                <!-- Skill Item: React -->
+                <div class="reveal reveal-up stagger-5 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
+                    data-category="frontend">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-react-original colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Frontend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">React
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Component-Based UI & State Management</p>
+                    </div>
+                </div>
+
+                <!-- Skill Item: C Programming -->
+                <div class="reveal reveal-up stagger-6 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
+                    data-category="backend">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-c-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Backend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">C
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Procedural Logic & Memory Management</p>
+                    </div>
+                </div>
+
+                <!-- Skill Item: Java -->
+                <div class="reveal reveal-up stagger-7 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
+                    data-category="backend">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-java-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Backend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">Java
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Object-Oriented Programming & Principles
+                        </p>
                     </div>
                 </div>
 
                 <!-- Skill Item: Python -->
-                <div class="reveal reveal-up stagger-6 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-8 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-python text-3xl text-blue-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">80%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">Python</h3>
-                    <p class="text-xs text-slate-400 mt-1">Scripting, Automation & Data Processing</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-blue-400 to-indigo-500 h-1.5 rounded-full"
-                            data-width="80"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-python-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Backend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">
+                            Python</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Scripting, Automation & Data Processing
+                        </p>
                     </div>
                 </div>
 
                 <!-- Skill Item: PHP -->
-                <div class="reveal reveal-up stagger-7 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-9 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-php text-3xl text-indigo-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">78%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">PHP</h3>
-                    <p class="text-xs text-slate-400 mt-1">Server-Side Logic & Database Integration</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full"
-                            data-width="78"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-php-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Backend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">PHP
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Server-Side Logic & Database Integration
+                        </p>
                     </div>
                 </div>
 
                 <!-- Skill Item: Laravel -->
-                <div class="reveal reveal-up stagger-8 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-red-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-10 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-laravel text-3xl text-red-500 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">75%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">Laravel</h3>
-                    <p class="text-xs text-slate-400 mt-1">PHP MVC, Eloquent ORM & REST APIs</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-red-500 to-orange-500 h-1.5 rounded-full"
-                            data-width="75"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-laravel-original colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Backend</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">
+                            Laravel</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">PHP MVC Architecture, Eloquent & APIs</p>
                     </div>
                 </div>
 
-                <!-- Skill Item: Machine Learning (Currently Learning) -->
-                <div class="reveal reveal-up stagger-9 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-pink-500/50 transition-all duration-300 group glow-border relative overflow-hidden"
+                <!-- Skill Item: MySQL & SQL -->
+                <div class="reveal reveal-up stagger-11 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-solid fa-brain text-3xl text-pink-400 group-hover:scale-110 transition-transform"></i>
-                        <span
-                            class="px-2.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 text-[10px] font-mono font-bold border border-pink-500/40 animate-pulse">Learning</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">Machine Learning</h3>
-                    <p class="text-xs text-slate-400 mt-1">AI Fundamentals, Model Training & Algorithms</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 h-1.5 rounded-full"
-                            data-width="65"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-mysql-original colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Database</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">MySQL
+                            & DBMS</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Relational Schema & Query Optimization
+                        </p>
                     </div>
                 </div>
 
-                <!-- Skill Item: DBMS & SQL -->
-                <div class="reveal reveal-up stagger-10 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <!-- Skill Item: Machine Learning -->
+                <div class="reveal reveal-up stagger-12 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-solid fa-database text-3xl text-cyan-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">82%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">DBMS & SQL</h3>
-                    <p class="text-xs text-slate-400 mt-1">Database Design, MySQL & Query Optimization</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-cyan-400 to-blue-500 h-1.5 rounded-full"
-                            data-width="82"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-tensorflow-original colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">AI
+                                / ML</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">
+                            Machine Learning</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">AI Fundamentals, Model Training &
+                            Algorithms</p>
                     </div>
                 </div>
 
                 <!-- Skill Item: DSA -->
-                <div class="reveal reveal-up stagger-11 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-13 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="backend">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-solid fa-diagram-project text-3xl text-purple-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">75%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">DSA</h3>
-                    <p class="text-xs text-slate-400 mt-1">Problem Solving & Logical Analysis</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-purple-500 to-brand-glow h-1.5 rounded-full"
-                            data-width="75"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-cplusplus-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Core</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">DSA
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Data Structures & Algorithmic Problem
+                            Solving</p>
                     </div>
                 </div>
 
-                <!-- Skill Item: Git & GitHub -->
-                <div class="reveal reveal-up stagger-12 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <!-- Skill Item: Git -->
+                <div class="reveal reveal-up stagger-14 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="tools">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-github text-3xl text-purple-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">85%</span>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-git-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Tools</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">Git
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Version Control & Branching Workflow</p>
                     </div>
-                    <h3 class="font-bold text-slate-200">Git & GitHub</h3>
-                    <p class="text-xs text-slate-400 mt-1">Version Control & Collaboration</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-purple-500 to-pink-500 h-1.5 rounded-full"
-                            data-width="85"></div>
+                </div>
+
+                <!-- Skill Item: GitHub -->
+                <div class="reveal reveal-up stagger-15 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
+                    data-category="tools">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-github-original text-3xl text-slate-100"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Tools</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">
+                            GitHub</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Remote Repositories & Collaboration</p>
                     </div>
                 </div>
 
                 <!-- Skill Item: Figma -->
-                <div class="reveal reveal-up stagger-13 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-16 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="tools">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-brands fa-figma text-3xl text-pink-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">75%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">Figma</h3>
-                    <p class="text-xs text-slate-400 mt-1">UI Prototyping & Wireframing</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-pink-500 to-purple-500 h-1.5 rounded-full"
-                            data-width="75"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-figma-plain colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Design</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">Figma
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">UI Prototyping & Wireframing</p>
                     </div>
                 </div>
 
                 <!-- Skill Item: Canva -->
-                <div class="reveal reveal-up stagger-14 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-teal-500/50 transition-all duration-300 group glow-border"
+                <div class="reveal reveal-up stagger-17 skill-card bg-dark-800/50 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group glow-border flex flex-col justify-between"
                     data-category="tools">
-                    <div class="flex items-center justify-between mb-4">
-                        <i
-                            class="fa-solid fa-palette text-3xl text-teal-400 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-xs font-mono text-cyan-400 font-bold">85%</span>
-                    </div>
-                    <h3 class="font-bold text-slate-200">Canva</h3>
-                    <p class="text-xs text-slate-400 mt-1">Visual Branding, Banners & Graphic Assets</p>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-4 overflow-hidden">
-                        <div class="skill-bar-fill bg-gradient-to-r from-teal-400 to-cyan-400 h-1.5 rounded-full"
-                            data-width="85"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-dark-900/80 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/40 group-hover:shadow-lg group-hover:shadow-cyan-500/10 transition-all duration-300">
+                                <i class="devicon-canva-original colored text-3xl"></i>
+                            </div>
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-dark-900/80 border border-slate-800 text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">Design</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-200 group-hover:text-cyan-400 transition-colors">Canva
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Visual Branding & Graphic Assets</p>
                     </div>
                 </div>
 
