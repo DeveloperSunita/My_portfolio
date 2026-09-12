@@ -21,9 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
             btnText.innerText = "Sending Message...";
             btnIcon.className = "fa-solid fa-spinner animate-spin text-xs";
 
+            // Set current Indian Standard Time (IST - Asia/Kolkata)
+            const now = new Date();
+            const istTime = now.toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                dateStyle: 'full',
+                timeStyle: 'medium'
+            }) + ' IST';
+
+            const timeInput = document.getElementById('sent-time-ist');
+            if (timeInput) {
+                timeInput.value = istTime;
+            }
+
             try {
                 const formData = new FormData(this);
                 const dataObj = Object.fromEntries(formData);
+                dataObj['Sent_Time_IST'] = istTime;
 
                 const response = await fetch('https://formsubmit.co/ajax/sunitapattanayak2005@gmail.com', {
                     method: 'POST',
