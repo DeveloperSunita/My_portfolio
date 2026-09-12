@@ -1,10 +1,13 @@
 /* ==========================================================================
    PRODUCTION READY JAVASCRIPT - SUNITA PATTANAYAK PORTFOLIO
+   Fully Animated · Every Element Animated · Premium Interactions
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. CONTACT FORM HANDLING WITH FORMSUBMIT.CO (No signup needed)
+    // ====================================================================
+    // 1. CONTACT FORM HANDLING WITH FORMSUBMIT.CO
+    // ====================================================================
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
@@ -20,27 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const formData = new FormData(this);
+                const dataObj = Object.fromEntries(formData);
+
                 const response = await fetch('https://formsubmit.co/ajax/sunitapattanayak2005@gmail.com', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify(Object.fromEntries(formData))
+                    body: JSON.stringify(dataObj)
                 });
 
                 const result = await response.json();
 
-                if (result.success) {
-                    showToast('Message sent successfully! 🎉', 'success');
+                if (result.success === "true" || result.success === true || response.ok) {
+                    showToast('Message sent directly to Sunita\'s Gmail! 🎉', 'success');
                     contactForm.reset();
                 } else {
-                    showToast('Failed to send message. Please try again.', 'error');
-                    console.error('Formsubmit Error:', result);
+                    showToast('Sending message...', 'info');
+                    this.submit();
                 }
             } catch (err) {
-                showToast('Failed to send message. Please try again.', 'error');
-                console.error('Submit Error:', err);
+                console.error('AJAX error, falling back to direct submit:', err);
+                this.submit();
             } finally {
                 submitBtn.disabled = false;
                 btnText.innerText = "Send Message";
@@ -50,7 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // ====================================================================
     // 2. INITIALIZE SMOOTH SCROLL (LENIS)
+    // ====================================================================
     const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -58,23 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
         smooth: true
     });
 
-    // Connect Lenis to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    // Sync GSAP ticker with Lenis raf
     gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
     });
 
-    // Disable lag smoothing in GSAP to avoid jumps
     gsap.ticker.lagSmoothing(0);
 
-    // 2b. Smooth scroll to anchor links using Lenis
+    // Smooth scroll to anchor links using Lenis
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href === '#' || href === '') return;
-            
+
             const targetElement = document.querySelector(href);
             if (targetElement) {
                 e.preventDefault();
@@ -87,11 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ====================================================================
     // 3. PRELOADER ANIMATION & CANVAS PARTICLES
+    // ====================================================================
     const preloader = document.getElementById('preloader');
     const loaderBar = document.getElementById('loader-bar');
     const loaderCount = document.getElementById('loader-count');
-    const loaderStatus = document.getElementById('loader-status');
+    const heroSection = document.getElementById('hero');
 
     let progress = 0;
     const interval = setInterval(() => {
@@ -104,7 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     opacity: 0,
                     duration: 0.8,
                     ease: "power2.inOut",
-                    onComplete: () => preloader.style.display = 'none'
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        // Trigger hero entrance animations
+                        if (heroSection) {
+                            heroSection.classList.add('hero-loaded');
+                        }
+                    }
                 });
             }, 300);
         }
@@ -145,7 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
         animateLoaderParticles();
     }
 
-    // 4. MAIN BACKGROUND CANVAS (DYNAMIC PARTICLES)
+    // ====================================================================
+    // 4. MAIN BACKGROUND CANVAS (CONNECTED PARTICLE NETWORK)
+    // ====================================================================
     const bgCanvas = document.getElementById('bg-canvas');
     if (bgCanvas) {
         const ctx = bgCanvas.getContext('2d');
@@ -157,19 +171,60 @@ document.addEventListener('DOMContentLoaded', () => {
             height = bgCanvas.height = window.innerHeight;
         });
 
-        const bgParticles = Array.from({ length: 60 }, () => ({
+        let mouseX = width / 2;
+        let mouseY = height / 2;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        const connectParticles = Array.from({ length: 60 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
-            size: Math.random() * 2,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
-            opacity: Math.random() * 0.5 + 0.2
+            size: Math.random() * 2 + 0.5,
+            speedX: (Math.random() - 0.5) * 0.4,
+            speedY: (Math.random() - 0.5) * 0.4,
+            opacity: Math.random() * 0.5 + 0.2,
+            color: ['rgba(6, 182, 212,', 'rgba(139, 92, 246,', 'rgba(59, 130, 246,'][Math.floor(Math.random() * 3)]
         }));
 
-        function drawBg() {
+        function drawConnectedBg() {
             ctx.clearRect(0, 0, width, height);
-            bgParticles.forEach(p => {
-                ctx.fillStyle = `rgba(139, 92, 246, ${p.opacity})`;
+
+            // Draw connections between particles
+            for (let i = 0; i < connectParticles.length; i++) {
+                for (let j = i + 1; j < connectParticles.length; j++) {
+                    const dx = connectParticles[i].x - connectParticles[j].x;
+                    const dy = connectParticles[i].y - connectParticles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.08 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(connectParticles[i].x, connectParticles[i].y);
+                        ctx.lineTo(connectParticles[j].x, connectParticles[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Connect to mouse cursor
+                const mDx = connectParticles[i].x - mouseX;
+                const mDy = connectParticles[i].y - mouseY;
+                const mDist = Math.sqrt(mDx * mDx + mDy * mDy);
+                if (mDist < 200) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(6, 182, 212, ${0.12 * (1 - mDist / 200)})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(connectParticles[i].x, connectParticles[i].y);
+                    ctx.lineTo(mouseX, mouseY);
+                    ctx.stroke();
+                }
+            }
+
+            // Draw particles
+            connectParticles.forEach(p => {
+                ctx.fillStyle = `${p.color} ${p.opacity})`;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -182,39 +237,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (p.y < 0) p.y = height;
                 if (p.y > height) p.y = 0;
             });
-            requestAnimationFrame(drawBg);
+            requestAnimationFrame(drawConnectedBg);
         }
-        drawBg();
+        drawConnectedBg();
     }
 
-    // 5. CUSTOM CURSOR TRACKING
+    // ====================================================================
+    // 5. CUSTOM CURSOR TRACKING — Enhanced
+    // ====================================================================
     const cursorDot = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
 
-    window.addEventListener('mousemove', (e) => {
-        const { clientX: x, clientY: y } = e;
+    if (cursorDot && cursorRing) {
+        window.addEventListener('mousemove', (e) => {
+            const { clientX: x, clientY: y } = e;
+            gsap.to(cursorDot, { x, y, duration: 0.1 });
+            gsap.to(cursorRing, { x, y, duration: 0.25, ease: "power2.out" });
+        });
 
-        gsap.to(cursorDot, { x, y, duration: 0.1 });
-        gsap.to(cursorRing, { x, y, duration: 0.3 });
-    });
+        const hoverables = document.querySelectorAll('a, button, input, textarea, .skill-card, .project-card, .service-card, .cert-card');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering-link'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering-link'));
+        });
+    }
 
-    const hoverables = document.querySelectorAll('a, button, input, textarea, .skill-card, .project-card');
-    hoverables.forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('hovering-link'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('hovering-link'));
-    });
-
+    // ====================================================================
     // 6. SCROLL PROGRESS BAR
+    // ====================================================================
     window.addEventListener('scroll', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / scrollHeight) * 100;
         document.getElementById('scroll-progress').style.width = `${scrolled}%`;
     });
 
-    // 7. TYPING ANIMATION (HERO SECTION)
+    // ====================================================================
+    // 7. TYPING ANIMATION (HERO SECTION) — Updated with backend roles
+    // ====================================================================
     const typedTextSpan = document.getElementById('typed-text');
-    const textArray = ["BCA Scholar", "Frontend Developer", "DBMS & Java Developer", "Problem Solver"];
+    const textArray = [
+        "Frontend Developer",
+        "Backend Developer",
+        "Full Stack Developer",
+        "Laravel & PHP Developer",
+        "Machine Learning Enthusiast",
+        "BCA Scholar",
+        "Problem Solver"
+    ];
     let textArrayIndex = 0;
     let charIndex = 0;
 
@@ -222,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (charIndex < textArray[textArrayIndex].length) {
             typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
             charIndex++;
-            setTimeout(type, 100);
+            setTimeout(type, 80);
         } else {
             setTimeout(erase, 2000);
         }
@@ -232,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (charIndex > 0) {
             typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
             charIndex--;
-            setTimeout(erase, 50);
+            setTimeout(erase, 40);
         } else {
             textArrayIndex++;
             if (textArrayIndex >= textArray.length) textArrayIndex = 0;
@@ -240,29 +310,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (typedTextSpan) setTimeout(type, 1000);
+    if (typedTextSpan) setTimeout(type, 1500);
 
+    // ====================================================================
     // 8. MOBILE MENU TOGGLE
+    // ====================================================================
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        const isOpen = menuToggle.classList.contains('active');
-        mobileMenu.style.opacity = isOpen ? '1' : '0';
-        mobileMenu.style.pointerEvents = isOpen ? 'auto' : 'none';
-    });
-
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            mobileMenu.style.opacity = '0';
-            mobileMenu.style.pointerEvents = 'none';
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            const isOpen = menuToggle.classList.contains('active');
+            mobileMenu.style.opacity = isOpen ? '1' : '0';
+            mobileMenu.style.pointerEvents = isOpen ? 'auto' : 'none';
         });
-    });
 
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.style.opacity = '0';
+                mobileMenu.style.pointerEvents = 'none';
+            });
+        });
+    }
+
+    // ====================================================================
     // 9. SKILL CATEGORY FILTERING
+    // ====================================================================
     const skillFilters = document.querySelectorAll('.skill-filter-btn');
     const skillCards = document.querySelectorAll('.skill-card');
 
@@ -276,35 +352,46 @@ document.addEventListener('DOMContentLoaded', () => {
             skillCards.forEach(card => {
                 if (category === 'all' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
-                    gsap.fromTo(card, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4 });
+                    gsap.fromTo(card, { opacity: 0, scale: 0.9, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" });
                 } else {
-                    card.style.display = 'none';
+                    gsap.to(card, {
+                        opacity: 0, scale: 0.9, duration: 0.3, onComplete: () => {
+                            card.style.display = 'none';
+                        }
+                    });
                 }
             });
         });
     });
 
+    // ====================================================================
     // 10. PROJECT SEARCH & FILTERING
+    // ====================================================================
     const projectSearch = document.getElementById('project-search');
     const projectFilters = document.querySelectorAll('.project-filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     function filterProjects() {
-        const query = projectSearch.value.toLowerCase();
-        const activeFilter = document.querySelector('.project-filter-btn.active').getAttribute('data-filter');
+        const query = projectSearch ? projectSearch.value.toLowerCase() : '';
+        const activeFilter = document.querySelector('.project-filter-btn.active');
+        const activeFilterVal = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
 
-        projectCards.forEach(card => {
+        projectCards.forEach((card, i) => {
             const title = card.querySelector('h3').innerText.toLowerCase();
             const category = card.getAttribute('data-category');
 
             const matchesQuery = title.includes(query);
-            const matchesCategory = activeFilter === 'all' || category === activeFilter;
+            const matchesCategory = activeFilterVal === 'all' || category === activeFilterVal;
 
             if (matchesQuery && matchesCategory) {
                 card.style.display = 'flex';
-                gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
+                gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, delay: i * 0.1, ease: "back.out(1.7)" });
             } else {
-                card.style.display = 'none';
+                gsap.to(card, {
+                    opacity: 0, y: -20, duration: 0.3, onComplete: () => {
+                        card.style.display = 'none';
+                    }
+                });
             }
         });
     }
@@ -320,7 +407,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // 12. COPY TO CLIPBOARD BUTTONS
+    // ====================================================================
+    // 11. COPY TO CLIPBOARD BUTTONS
+    // ====================================================================
     document.getElementById('copy-email-btn')?.addEventListener('click', () => {
         navigator.clipboard.writeText('sunitapattanayak2005@gmail.com');
         showToast('Email address copied to clipboard!', 'info');
@@ -335,7 +424,9 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Resume download started!', 'info');
     });
 
-    // 13. TOAST NOTIFICATION SYSTEM
+    // ====================================================================
+    // 12. TOAST NOTIFICATION SYSTEM
+    // ====================================================================
     function showToast(message, type = 'info') {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
@@ -358,24 +449,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3500);
     }
 
-    // 14. GSAP SCROLL TRIGGER REVEAL ANIMATIONS
+    // ====================================================================
+    // 13. GSAP SCROLL TRIGGER — INTERSECTION OBSERVER REVEAL SYSTEM
+    // ====================================================================
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.utils.toArray('section').forEach(section => {
-        gsap.from(section, {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: section,
-                start: "top 80%",
-                toggleActions: "play none none reverse"
+    // IntersectionObserver for .reveal elements
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
             }
         });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     });
 
-    // 15. STATS COUNTER ANIMATION
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // ====================================================================
+    // 14. SKILL BAR SCROLL ANIMATION — Bars grow from 0% to target
+    // ====================================================================
+    const skillBarObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bars = entry.target.querySelectorAll('.skill-bar-fill');
+                bars.forEach((bar, i) => {
+                    const targetWidth = bar.getAttribute('data-width');
+                    setTimeout(() => {
+                        bar.style.width = targetWidth + '%';
+                        bar.classList.add('animate');
+                    }, i * 100);
+                });
+                skillBarObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    const skillsGrid = document.getElementById('skills-grid');
+    if (skillsGrid) {
+        skillBarObserver.observe(skillsGrid);
+    }
+
+    // ====================================================================
+    // 15. STATS COUNTER ANIMATION — Spring easing
+    // ====================================================================
     const statNumbers = document.querySelectorAll('.stat-number');
     if (statNumbers.length > 0) {
         const statsSection = document.getElementById('stats');
@@ -385,20 +509,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (statsAnimated) return;
             statsAnimated = true;
 
-            statNumbers.forEach(num => {
+            statNumbers.forEach((num, i) => {
                 const target = parseInt(num.getAttribute('data-target'));
                 const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
 
-                const counter = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(counter);
+                // Use GSAP for smooth spring-like counter
+                gsap.to({ val: 0 }, {
+                    val: target,
+                    duration: duration / 1000,
+                    delay: i * 0.15,
+                    ease: "power2.out",
+                    onUpdate: function () {
+                        const current = Math.floor(this.targets()[0].val);
+                        num.innerText = current + '+';
                     }
-                    num.innerText = Math.floor(current) + (target >= 100 ? '+' : '+');
-                }, 16);
+                });
             });
         }
 
@@ -411,7 +536,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ====================================================================
     // 16. BACK TO TOP BUTTON
+    // ====================================================================
     const backToTopBtn = document.getElementById('back-to-top');
     if (backToTopBtn) {
         window.addEventListener('scroll', () => {
@@ -430,64 +557,206 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 17. ENHANCED BACKGROUND PARTICLES WITH CONNECTIONS
-    // Override the basic bg canvas with connected particle network
-    if (bgCanvas) {
-        const connectCtx = bgCanvas.getContext('2d');
-        const connectParticles = Array.from({ length: 50 }, () => ({
-            x: Math.random() * bgCanvas.width,
-            y: Math.random() * bgCanvas.height,
-            size: Math.random() * 2 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.4,
-            speedY: (Math.random() - 0.5) * 0.4,
-            opacity: Math.random() * 0.5 + 0.2,
-            color: ['rgba(6, 182, 212,', 'rgba(139, 92, 246,', 'rgba(59, 130, 246,'][Math.floor(Math.random() * 3)]
-        }));
+    // ====================================================================
+    // 17. MOUSE-FOLLOW GLOW ON CARDS
+    // ====================================================================
+    const glowCards = document.querySelectorAll('.card-hover-glow, .skill-card, .project-card, .service-card, .cert-card');
+    glowCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+        });
+    });
 
-        function drawConnectedBg() {
-            connectCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-
-            // Draw connections
-            for (let i = 0; i < connectParticles.length; i++) {
-                for (let j = i + 1; j < connectParticles.length; j++) {
-                    const dx = connectParticles[i].x - connectParticles[j].x;
-                    const dy = connectParticles[i].y - connectParticles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        connectCtx.beginPath();
-                        connectCtx.strokeStyle = `rgba(139, 92, 246, ${0.08 * (1 - dist / 150)})`;
-                        connectCtx.lineWidth = 0.5;
-                        connectCtx.moveTo(connectParticles[i].x, connectParticles[i].y);
-                        connectCtx.lineTo(connectParticles[j].x, connectParticles[j].y);
-                        connectCtx.stroke();
-                    }
-                }
-            }
-
-            // Draw particles
-            connectParticles.forEach(p => {
-                connectCtx.fillStyle = `${p.color} ${p.opacity})`;
-                connectCtx.beginPath();
-                connectCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                connectCtx.fill();
-
-                p.x += p.speedX;
-                p.y += p.speedY;
-
-                if (p.x < 0) p.x = bgCanvas.width;
-                if (p.x > bgCanvas.width) p.x = 0;
-                if (p.y < 0) p.y = bgCanvas.height;
-                if (p.y > bgCanvas.height) p.y = 0;
+    // ====================================================================
+    // 18. MAGNETIC BUTTON EFFECT
+    // ====================================================================
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            gsap.to(btn, {
+                x: x * 0.15,
+                y: y * 0.15,
+                duration: 0.3,
+                ease: "power2.out"
             });
-            requestAnimationFrame(drawConnectedBg);
-        }
-        // Start the enhanced version (replaces the basic drawBg)
-        drawConnectedBg();
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                x: 0,
+                y: 0,
+                duration: 0.5,
+                ease: "elastic.out(1, 0.5)"
+            });
+        });
+
+        // Ripple effect on click
+        btn.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
+    // ====================================================================
+    // 19. ACTIVE NAV HIGHLIGHTING ON SCROLL
+    // ====================================================================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function updateActiveNav() {
+        const scrollY = window.scrollY + 150;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
     }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+
+    // ====================================================================
+    // 20. VANILLA TILT — Apply to more elements
+    // ====================================================================
+    if (typeof VanillaTilt !== 'undefined') {
+        // Apply tilt to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            VanillaTilt.init(card, {
+                max: 8,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.05,
+            });
+        });
+
+        // Apply tilt to portfolio step cards
+        document.querySelectorAll('.portfolio-step-card').forEach(card => {
+            VanillaTilt.init(card, {
+                max: 5,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.03,
+            });
+        });
+    }
+
+    // ====================================================================
+    // 21. ANIMATED GRADIENT BORDER ROTATION
+    // ====================================================================
+    let borderAngle = 0;
+    function animateBorderAngle() {
+        borderAngle = (borderAngle + 0.5) % 360;
+        document.querySelectorAll('.glow-border').forEach(el => {
+            el.style.setProperty('--border-angle', borderAngle + 'deg');
+        });
+        requestAnimationFrame(animateBorderAngle);
+    }
+    animateBorderAngle();
+
+    // ====================================================================
+    // 22. GSAP PARALLAX ON BACKGROUND ELEMENTS
+    // ====================================================================
+    gsap.utils.toArray('.parallax-float').forEach(el => {
+        gsap.to(el, {
+            y: -80,
+            scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+    });
+
+    gsap.utils.toArray('.parallax-float-2').forEach(el => {
+        gsap.to(el, {
+            y: -120,
+            scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.5
+            }
+        });
+    });
+
+    // ====================================================================
+    // 23. SECTION HEADER LINE ANIMATION
+    // ====================================================================
+    document.querySelectorAll('.section-header-line').forEach(line => {
+        ScrollTrigger.create({
+            trigger: line,
+            start: "top 85%",
+            onEnter: () => line.classList.add('revealed')
+        });
+    });
+
+    // ====================================================================
+    // 24. NAVBAR HIDE/SHOW ON SCROLL
+    // ====================================================================
+    let lastScrollY = 0;
+    const header = document.getElementById('main-header');
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down — hide
+            gsap.to(header, { y: -100, duration: 0.3, ease: "power2.inOut" });
+        } else {
+            // Scrolling up — show
+            gsap.to(header, { y: 0, duration: 0.3, ease: "power2.inOut" });
+        }
+
+        // Add glass effect when scrolled
+        if (currentScrollY > 50) {
+            header.classList.add('bg-dark-900/80');
+            header.classList.remove('bg-dark-900/60');
+        } else {
+            header.classList.remove('bg-dark-900/80');
+            header.classList.add('bg-dark-900/60');
+        }
+
+        lastScrollY = currentScrollY;
+    });
+
+    // ====================================================================
+    // 25. SOCIAL ICON STAGGER ENTRANCE
+    // ====================================================================
+    const socialIcons = document.querySelectorAll('.social-icon');
+    socialIcons.forEach((icon, i) => {
+        icon.style.animationDelay = `${0.8 + i * 0.1}s`;
+    });
 
 });
 
-// Modal Logic
+// ====================================================================
+// MODAL LOGIC (Global scope)
+// ====================================================================
 function openModal(title, desc) {
     const modal = document.getElementById('project-modal');
     const modalCard = document.getElementById('modal-card');
